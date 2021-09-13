@@ -7,6 +7,7 @@ class CoinShowPage extends Component {
     super(props);
     this.state = { coin: null };
   }
+  
   componentDidMount() {
     Coin.show(this.props.match.params.id).then(coin => {
       this.setState({
@@ -15,11 +16,22 @@ class CoinShowPage extends Component {
     });
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.match.params.id !== prevProps.match.params.id) {
+      Coin.show(this.props.match.params.id).then(coin => {
+        this.setState({
+          coin: coin
+        });
+      });
+    }
+  }
+
+
   render() {
     if (!this.state.coin) {
       return <Spinner />;
     }
-    const { name, current_price, market_cap, low_24h, high_24h, circulating_supply, total_supply, market_cap_rank } = this.state.coin;
+    const { name, symbol, image, market_data } = this.state.coin;
     return (
       <main>
         <div className="ui placeholder segment">
@@ -27,24 +39,24 @@ class CoinShowPage extends Component {
             <div className="column">
               <div className="ui form">
                 <div className="field">
-                  <label>{name}</label>
-                  <hr className="show line" />
+                  <label><img src={image.thumb} className='logo' alt='image'/>{name.toUpperCase()}{`(${symbol.toUpperCase()})`}</label>
                 </div>
-                <p>CURRENT PRICE: ${current_price}</p>
-                <p>MARKET CAP: {market_cap}</p>
-                <p>LOW 24H: {low_24h}</p>
-                <p>HIGH 24H: {high_24h}</p>
-                <p>CIRCULATING SUPPLY: {circulating_supply}</p>
-                <p>TOTAL SUPPLY: {total_supply}</p>
-                <p>MARKET CAP RANK: {market_cap_rank}</p>
+                <hr className="show line" />
+                <p>CURRENT PRICE: ${market_data.current_price.cad}</p>
+                <p>MARKET CAP: {market_data.market_cap.cad}</p>
+                <p>LOW 24H: {market_data.low_24h.cad}</p>
+                <p>HIGH 24H: {market_data.high_24h.cad}</p>
+                <p>CIRCULATING SUPPLY: {market_data.circulating_supply}</p>
+                <p>TOTAL SUPPLY: {market_data.total_supply}</p>
+                <p>MARKET CAP RANK: {market_data.market_cap_rank}</p>
                 <div className="favourite">
                   <button>add to favourite</button>
                 </div>
               </div>
             </div>
-            <div className="middle aligned column">
+            <div className="column">
               <form>
-                <div className="buy">
+                <div className="two column row">
                   <button className="ui orange basic button">BUY</button>
                   <button className="ui orange basic button">SELL</button>
                   <div className="ui dropdown item">

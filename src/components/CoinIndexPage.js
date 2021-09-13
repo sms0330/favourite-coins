@@ -22,6 +22,7 @@ class CoinIndexPage extends Component {
         ) {
           return true;
         }
+        return false;
       });
       this.setState({
         coins: filteredCoins,
@@ -60,6 +61,7 @@ class CoinIndexPage extends Component {
             ))}
           </tbody>
         </table>
+        <br/>
       </main>
     );
   }

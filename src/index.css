@@ -77,7 +77,7 @@
 }
 
 .buttons {
-  background: orange;
+  background: #ff962e;
   border: 1px solid white;
   color: white;
   padding: 18px;
@@ -107,4 +107,26 @@
   text-transform: uppercase;
   margin-right: 10px;
   line-height: 37.9px;
+}
+
+.logo {
+  position: absolute;
+  left: 0%;
+  right: 0.58%;
+  top: 0%;
+  bottom: 0%;
+
+  /* BTC */
+
+  /* background: #f7931a; */
+}
+
+.show line {
+  position: absolute;
+  width: 246px;
+  height: 0px;
+  left: 230px;
+  top: 843px;
+
+  border: 2px solid #ffffff;
 }
