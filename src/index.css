@@ -12,7 +12,7 @@
 }
 @media (min-width: 1024px) {
   main {
-    min-width: 648px;
+    width: 648px;
     margin: auto;
   }
 }
@@ -107,4 +107,27 @@
   text-transform: uppercase;
   margin-right: 10px;
   line-height: 37.9px;
+}
+
+.logo {
+  position: relative;
+  left: -2%;
+  right: 0%;
+  top: -1%;
+  bottom: 0%;
+
+  /* BTC */
+
+  /* background: #f7931a; */
+}
+
+.show-line {
+  border: 1px solid #ffffff;
+}
+
+#show-column {
+  background-color: #f3f3f3;
+  padding: 0, 0, 0, 0;
+  /* border: 1px solid #e2e2e2;
+  box-sizing: border-box; */
 }
