@@ -35,7 +35,7 @@ class CoinShowPage extends Component {
     return (
       <main>
         <div className="ui segment">
-          <div className="ui two column very relaxed grid">
+          <div className="ui two column grid">
             <div className="column" id="show-column">
               <div className="ui form">
                 <div className="field">
@@ -50,7 +50,7 @@ class CoinShowPage extends Component {
                 <p><strong>TOTAL SUPPLY:</strong> {market_data.total_supply}</p>
                 <p><strong>MARKET CAP RANK:</strong> {market_data.market_cap_rank}</p>
                 <div className="favourite">
-                  <button>add to favourite</button>
+                  <small> ⨁ ADD TO FAVOURITE</small>
                 </div>
               </div>
             </div>
