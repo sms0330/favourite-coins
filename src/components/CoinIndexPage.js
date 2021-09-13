@@ -52,11 +52,11 @@ class CoinIndexPage extends Component {
             {this.state.coins.map((coin, index) => (
               <tr key={index}>
                 <td data-label="NAME">
-                  <Link to={`/coins/${coin.id}`}>{coin.name}</Link>
+                  <Link to={`/coins/${coin.id}`}>{coin.name.toUpperCase()}</Link>
                 </td>
-                <td data-label="TOTAL SUPPLY">{coin.circulating_supply || 'insert value'}</td>
-                <td data-label="MARKET CAP">{coin.market_cap || 'insert value'}</td>
-                <td data-label="CURRENT PRICE">${coin.current_price || 'insert value'}</td>
+                <td data-label="TOTAL SUPPLY">{coin.total_supply || 'INSERT VALUE'}</td>
+                <td data-label="MARKET CAP">{coin.market_cap || 'INSERT VALUE'}</td>
+                <td data-label="CURRENT PRICE">${coin.current_price || 'INSERT VALUE'}</td>
               </tr>
             ))}
           </tbody>
