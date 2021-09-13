@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import CoinIndexPage from './components/CoinIndexPage';
 import FavouritePage from './components/FavouritePage';
 import Spinner from "./components/Spinner";
-
+import CoinShowPage from './components/CoinShowPage';
 class App extends Component {
   constructor(props) {
     super(props);
@@ -22,11 +22,11 @@ class App extends Component {
           <FavouritePage />
           <CoinIndexPage />
             <Switch>
-              {/* <Route
+              <Route
                 exact
                 path="/coins/:id"
-                component={CoinsShowPage}
-              /> */}
+                component={CoinShowPage}
+              />
             </Switch>
         </Router>
       </div>
