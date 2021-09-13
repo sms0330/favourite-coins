@@ -1,24 +1,37 @@
-import './App.css';
+import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import CoinIndexPage from './components/CoinIndexPage';
-import NavBar from './components/NavBar';
-
-function App() {
-  return (
-    <div className="App">
-      <Router>
-        <NavBar />
-        <CoinIndexPage />
-          <Switch>
-            {/* <Route
-              exact
-              path="/coins/:id"
-              component={CoinsShowPage}
-            /> */}
-           </Switch>
-      </Router>
-    </div>
-  );
+import FavouritePage from './components/FavouritePage';
+import Spinner from "./components/Spinner";
+import CoinShowPage from './components/CoinShowPage';
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: false
+    }
+  }
+  
+  render() {
+    if (this.state.loading) {
+      return <Spinner />;
+    }
+    return (
+      <div className="App">
+        <Router>
+          <FavouritePage />
+          <CoinIndexPage />
+            <Switch>
+              <Route
+                exact
+                path="/coins/:id"
+                component={CoinShowPage}
+              />
+            </Switch>
+        </Router>
+      </div>
+    );
+  }
 }
 
 export default App;
