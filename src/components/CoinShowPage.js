@@ -35,7 +35,7 @@ class CoinShowPage extends Component {
     return (
       <main>
         <div className="ui segment">
-          <div className="ui two column very relaxed grid">
+          <div className="ui two column grid">
             <div className="column" id="show-column">
               <div className="ui form">
                 <div className="field">
