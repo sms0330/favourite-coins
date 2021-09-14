@@ -35,8 +35,7 @@ class CoinShowPage extends Component {
     let clickedCoin = this.props.match.params.id;
     // this.props.favourites.push(clickedCoin);
     this.props.clickedCoins.push(clickedCoin);
-    
-
+    console.log(this.props.clickedCoins);
 
     // if (!this.props.match.params.id) {
     //   console.log('bye')
