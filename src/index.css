@@ -162,5 +162,6 @@
   color: rgb(56, 163, 250);
 }
 
-#favorite {
+main {
+  margin-top: 3vh;
 }

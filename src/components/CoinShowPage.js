@@ -5,10 +5,27 @@ import Spinner from './Spinner';
 class CoinShowPage extends Component {
   constructor(props) {
     super(props);
-    this.state = { coin: null, showingCoin: null};
+    this.state = { coin: null, showingCoin: null, coins: [], info: null, currency: null};
   }
   
   componentDidMount() {
+    Coin.index().then(coins => {
+      const filteredCoins = coins.filter(c => {
+        if (
+          c.id === 'bitcoin' ||
+          c.id === 'ethereum' ||
+          c.id === 'ripple' ||
+          c.id === 'bitcoin-cash' ||
+          c.id === 'litecoin'
+        ) {
+          return true;
+        }
+        return false;
+      });
+      this.setState({
+        coins: filteredCoins,
+      });
+    });
     Coin.show(this.props.match.params.id).then(coin => {
       this.setState({
         coin: coin
@@ -25,6 +42,17 @@ class CoinShowPage extends Component {
       });
     }
   }
+
+HandleChange = (e) => {
+    e.preventDefault()
+    
+    const chosen = e.target.value
+    this.setState({info: this.state.coins.filter((coi) => {
+        return coi.name === chosen
+    })});
+
+    this.setState({currency: chosen});
+};
 
 
   render() {
@@ -54,7 +82,7 @@ class CoinShowPage extends Component {
                 <p><strong>TOTAL SUPPLY:</strong> {market_data.total_supply}</p>
                 <p><strong>MARKET CAP RANK:</strong> {market_data.market_cap_rank}</p>
                 <div className="favourite">
-                  <small onClick={(e) => this.props.passToParent(e, name.toUpperCase(), image.thumb )}> ⨁ ADD TO FAVOURITE</small>
+                  <small onClick={(e) => this.props.passToParent(e, name.toUpperCase())}> ⨁ ADD TO FAVOURITE</small>
                 </div>
               </div>
             </div>
@@ -65,13 +93,21 @@ class CoinShowPage extends Component {
                   <button className="ui orange basic button">BUY</button>
                   <button className="ui orange basic button">SELL</button>
                   <div/><br/>
-                  <div className="ui dropdown item">
-                    Select Trade Currency <i className="dropdown icon"></i>
-                    <div className="menu">
-                        <i className="item">BITCOIN</i>
-                        <i className="item">ETEHEREUM</i>
-                        <i className="item">XRP</i>
-                    </div>
+                  <div className="dropdown">
+                    <select value={this.state.currency} onChange={this.HandleChange}>
+                      <option disabled selected>Select Trade Currency </option>
+                      {   
+                         this.state.coins.map((coin) => {
+                            return (
+                                    <option key={coin.name} 
+                                        value={coin.name}
+                                        >
+                                        {coin.name}
+                                    </option>
+                            );
+                        })
+                        }
+                    </select>
                   </div><br/>
                   <br/>
                   <div className="ui dropdown item">
