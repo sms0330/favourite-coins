@@ -1,31 +1,15 @@
 import React, { Component } from 'react';
 import { Coin } from '../requests';
+import BuySell from './BuySell';
 import Spinner from './Spinner';
 
 class CoinShowPage extends Component {
   constructor(props) {
     super(props);
-    this.state = { coin: null, showingCoin: null, coins: [], info: null, currency: null};
+    this.state = { coin: null, showingCoin: null };
   }
   
   componentDidMount() {
-    Coin.index().then(coins => {
-      const filteredCoins = coins.filter(c => {
-        if (
-          c.id === 'bitcoin' ||
-          c.id === 'ethereum' ||
-          c.id === 'ripple' ||
-          c.id === 'bitcoin-cash' ||
-          c.id === 'litecoin'
-        ) {
-          return true;
-        }
-        return false;
-      });
-      this.setState({
-        coins: filteredCoins,
-      });
-    });
     Coin.show(this.props.match.params.id).then(coin => {
       this.setState({
         coin: coin
@@ -42,18 +26,6 @@ class CoinShowPage extends Component {
       });
     }
   }
-
-HandleChange = (e) => {
-    e.preventDefault()
-    
-    const chosen = e.target.value
-    this.setState({info: this.state.coins.filter((coi) => {
-        return coi.name === chosen
-    })});
-
-    this.setState({currency: chosen});
-};
-
 
   render() {
     if (!this.state.coin) {
@@ -87,40 +59,7 @@ HandleChange = (e) => {
               </div>
             </div>
             <div className="column">
-              <form>
-                <div className="two column row">
-                  <br/>
-                  <button className="ui orange basic button">BUY</button>
-                  <button className="ui orange basic button">SELL</button>
-                  <div/><br/>
-                  <div className="dropdown">
-                    <select value={this.state.currency} onChange={this.HandleChange}>
-                      <option disabled selected>Select Trade Currency </option>
-                      {   
-                         this.state.coins.map((coin) => {
-                            return (
-                                    <option key={coin.name} 
-                                        value={coin.name}
-                                        >
-                                        {coin.name}
-                                    </option>
-                            );
-                        })
-                        }
-                    </select>
-                  </div><br/>
-                  <br/>
-                  <div className="ui dropdown item">
-                    Amount <i className="dropdown icon"></i>
-                    <div className="menu">
-                        <i className="item">1</i>
-                        <i className="item">2</i>
-                        <i className="item">3</i>
-                    </div>
-                  </div><br/><br/>
-                  <button className="ui orange button">SUBMIT</button>
-                </div>
-              </form>
+              <BuySell />
             </div>
           </div>
         </div>
