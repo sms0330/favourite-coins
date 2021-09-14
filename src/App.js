@@ -5,8 +5,7 @@ import FavouritePage from './components/FavouritePage';
 import Spinner from "./components/Spinner";
 import CoinShowPage from './components/CoinShowPage';
 
-// let lastId = savedFavourites.length-1
-let saveData = JSON.parse(localStorage.getItem("favourites"));
+const saveData = JSON.parse(localStorage.getItem("favourites"));
 class App extends Component {
   constructor(props) {
     super(props);
@@ -16,10 +15,6 @@ class App extends Component {
       images: []
     }
   }
-
-  // handleSave = () => {
-  //   localStorage.setItem("favourites", JSON.stringify(this.state.favourites))
-  // }
 
   componentDidMount() {
     const savedFavourites = JSON.parse(localStorage.getItem("favourites"));
