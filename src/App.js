@@ -12,7 +12,6 @@ class App extends Component {
     this.state = {
       loading: false, 
       favourites: saveData ? saveData : [],
-      images: []
     }
   }
 
@@ -32,22 +31,19 @@ class App extends Component {
     }
   }
 
-  childCallback(e, value, image) {
+  childCallback(e, value) {
     // value passed from child
     if (!this.state.favourites.includes(value)) {
     e.preventDefault();
     console.log(value);
     console.log(this.state)
     this.setState({favourites: [...this.state.favourites, value]});
-    this.setState({images: [...this.state.images, image]});
     }
   }
 
   remove(i) {
     this.state.favourites.splice(i,1);
     this.setState({favourites: [...this.state.favourites]})
-    this.state.images.splice(i,1);
-    this.setState({images: [...this.state.images]})
     console.log(this.state.favourites)
 
   }
@@ -59,7 +55,7 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
-          <FavouritePage favourites={this.state.favourites} images={this.state.images} remove={this.remove.bind(this)}/>
+          <FavouritePage favourites={this.state.favourites} remove={this.remove.bind(this)}/>
           <CoinIndexPage />
             <Switch>
               <Route
