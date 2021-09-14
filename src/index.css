@@ -127,7 +127,9 @@
 
 #show-column {
   background-color: #f3f3f3;
-  padding: 0, 0, 0, 0;
-  /* border: 1px solid #e2e2e2;
-  box-sizing: border-box; */
+}
+.favourite {
+  padding-left: 22px;
+  padding-top: 5px;
+  color: rgb(56, 163, 250);
 }

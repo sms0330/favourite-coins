@@ -5,7 +5,7 @@ import Spinner from './Spinner';
 class CoinShowPage extends Component {
   constructor(props) {
     super(props);
-    this.state = { coin: null };
+    this.state = { coin: null};
   }
   
   componentDidMount() {
@@ -26,6 +26,27 @@ class CoinShowPage extends Component {
     }
   }
 
+  addFavourite = (e) => {
+    e.preventDefault();
+    // if (this.props.match.params.id) {
+    //   console.log('hi')
+    //   this.setState([this.state.coin.symbol])
+    // }
+    let clickedCoin = this.props.match.params.id;
+    // this.props.favourites.push(clickedCoin);
+    this.props.clickedCoins.push(clickedCoin);
+    
+
+
+    // if (!this.props.match.params.id) {
+    //   console.log('bye')
+    //   this.setState([...this.state.favourites, this.state.coin.symbol])
+    // }
+  }
+
+
+
+
 
   render() {
     if (!this.state.coin) {
@@ -39,7 +60,7 @@ class CoinShowPage extends Component {
             <div className="column" id="show-column">
               <div className="ui form">
                 <div className="field">
-                  <label><img src={image.thumb} className='logo' alt='image'/>{name.toUpperCase()}{`(${symbol.toUpperCase()})`}</label>
+                  <label><img src={image.thumb} className='logo' alt='logo'/>{name.toUpperCase()}{`(${symbol.toUpperCase()})`}</label>
                 </div>
                 <hr className="show-line" />
                 <p><strong>CURRENT PRICE:</strong> ${market_data.current_price.cad}</p>
@@ -50,7 +71,7 @@ class CoinShowPage extends Component {
                 <p><strong>TOTAL SUPPLY:</strong> {market_data.total_supply}</p>
                 <p><strong>MARKET CAP RANK:</strong> {market_data.market_cap_rank}</p>
                 <div className="favourite">
-                  <button>add to favourite</button>
+                  <small onClick={(e) => this.addFavourite(e)}> ⨁ ADD TO FAVOURITE</small>
                 </div>
               </div>
             </div>
@@ -64,18 +85,18 @@ class CoinShowPage extends Component {
                   <div className="ui dropdown item">
                     Select Trade Currency <i className="dropdown icon"></i>
                     <div className="menu">
-                        <a className="item">BITCOIN</a>
-                        <a className="item">ETEHEREUM</a>
-                        <a className="item">XRP</a>
+                        <i className="item">BITCOIN</i>
+                        <i className="item">ETEHEREUM</i>
+                        <i className="item">XRP</i>
                     </div>
                   </div><br/>
                   <br/>
                   <div className="ui dropdown item">
                     Amount <i className="dropdown icon"></i>
                     <div className="menu">
-                        <a className="item">1</a>
-                        <a className="item">2</a>
-                        <a className="item">3</a>
+                        <i className="item">1</i>
+                        <i className="item">2</i>
+                        <i className="item">3</i>
                     </div>
                   </div><br/><br/>
                   <button className="ui orange button">SUBMIT</button>
