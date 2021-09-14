@@ -90,23 +90,52 @@
   margin-right: 10px;
 }
 
-.buttons:hover {
-  font-size: 0;
-  background: rgba(10, 10, 10, 0.123);
-  border: 1px solid transparent;
+.faveButtons img {
+  height: 20px;
+  width: 20px;
+  filter: brightness(0) invert(1);
 }
 
-.buttons:hover:after {
-  content: attr(data-hover);
-  font-size: 12px;
+.faveButtons:hover img {
+  opacity: 0;
+}
+
+.faveButtons {
+  background: orange;
+  border: 1px solid white;
+  color: white;
+  padding: 0px;
+  height: 50px;
+  width: 150px;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+.faveButtons:hover {
+  font-size: 0;
+  padding: 0px;
+  background: rgba(255, 0, 0, 0.123);
   border: 1px solid transparent;
-  padding: 18px;
-  width: 160px;
-  margin-bottom: 30px;
+  text-align: center;
+}
+
+.faveButtons span span img {
+  height: 20px;
+  width: 20px;
+  filter: brightness(0) invert(1);
+}
+
+.faveButtons:hover:after {
+  content: 'remove';
+  font-size: 12px;
+  padding: 0px;
+  height: 50px;
+  width: 150px;
   font-weight: bold;
   text-transform: uppercase;
   margin-right: 10px;
-  line-height: 37.9px;
 }
 
 .logo {
@@ -115,10 +144,6 @@
   right: 0%;
   top: -1%;
   bottom: 0%;
-
-  /* BTC */
-
-  /* background: #f7931a; */
 }
 
 .show-line {
@@ -128,6 +153,7 @@
 #show-column {
   background-color: #f3f3f3;
 }
+
 .favourite {
   padding-left: 22px;
   padding-top: 5px;
