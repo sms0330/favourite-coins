@@ -8,10 +8,15 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: false
+      loading: false, 
+      favourites: []
     }
   }
-  
+
+  liftStateUp = (data) =>{
+    this.setState({ favourites: [ data, ...this.state.favourites ]  })
+  }
+
   render() {
     if (this.state.loading) {
       return <Spinner />;
@@ -19,13 +24,15 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
-          <FavouritePage />
+          <FavouritePage clickedCoins={this.state.favourites}/>
           <CoinIndexPage />
             <Switch>
               <Route
                 exact
                 path="/coins/:id"
-                component={CoinShowPage}
+                // component={CoinShowPage}
+                render={(props) => <CoinShowPage {...props} clickedCoins={this.state.favourites} />}
+
               />
             </Switch>
         </Router>
