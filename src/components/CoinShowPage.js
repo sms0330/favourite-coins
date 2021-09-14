@@ -5,7 +5,7 @@ import Spinner from './Spinner';
 class CoinShowPage extends Component {
   constructor(props) {
     super(props);
-    this.state = { coin: null};
+    this.state = { coin: null, showingCoin: null};
   }
   
   componentDidMount() {
@@ -16,7 +16,7 @@ class CoinShowPage extends Component {
     });
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     if (this.props.match.params.id !== prevProps.match.params.id) {
       Coin.show(this.props.match.params.id).then(coin => {
         this.setState({
@@ -25,26 +25,6 @@ class CoinShowPage extends Component {
       });
     }
   }
-
-  addFavourite = (e) => {
-    e.preventDefault();
-    // if (this.props.match.params.id) {
-    //   console.log('hi')
-    //   this.setState([this.state.coin.symbol])
-    // }
-    let clickedCoin = this.props.match.params.id;
-    // this.props.favourites.push(clickedCoin);
-    this.props.clickedCoins.push(clickedCoin);
-    console.log(this.props.clickedCoins);
-
-    // if (!this.props.match.params.id) {
-    //   console.log('bye')
-    //   this.setState([...this.state.favourites, this.state.coin.symbol])
-    // }
-  }
-
-
-
 
 
   render() {
@@ -59,7 +39,11 @@ class CoinShowPage extends Component {
             <div className="column" id="show-column">
               <div className="ui form">
                 <div className="field">
-                  <label><img src={image.thumb} className='logo' alt='logo'/>{name.toUpperCase()}{`(${symbol.toUpperCase()})`}</label>
+                  <label>
+                    <img src={image.thumb} style={{verticalAlign:"middle"}} className='logo' alt='logo'/>
+                    <span style={{verticalAlign:"middle"}}>{name.toUpperCase()}</span>
+                    <span style={{verticalAlign:"middle"}}>{`(${symbol.toUpperCase()})`}</span>
+                  </label>
                 </div>
                 <hr className="show-line" />
                 <p><strong>CURRENT PRICE:</strong> ${market_data.current_price.cad}</p>
@@ -70,7 +54,7 @@ class CoinShowPage extends Component {
                 <p><strong>TOTAL SUPPLY:</strong> {market_data.total_supply}</p>
                 <p><strong>MARKET CAP RANK:</strong> {market_data.market_cap_rank}</p>
                 <div className="favourite">
-                  <small onClick={(e) => this.addFavourite(e)}> ⨁ ADD TO FAVOURITE</small>
+                  <small onClick={(e) => this.props.passToParent(e, name.toUpperCase(), image.thumb )}> ⨁ ADD TO FAVOURITE</small>
                 </div>
               </div>
             </div>
