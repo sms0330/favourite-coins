@@ -30,6 +30,23 @@ class FavouritePage extends Component {
         })
     }
 
+    componentDidMount() {
+        this.setState((state) => {
+            return {
+                favourites: state.favourites
+            }
+        })
+    }
+    
+      componentDidUpdate(prevProps) {
+        if (this.props.clickedCoins !== prevProps.props.clickedCoins) {
+            this.setState((state) => {
+                return {
+                    favourites: state.favourites
+                }
+            })
+        }
+      }
 
     render() {
         if (!this.state.favourites) {
@@ -44,7 +61,7 @@ class FavouritePage extends Component {
                 </h1>
                 <button onClick={() => console.log(this.props.clickedCoins)}>Button</button>
                 {/* //this.props.clickedCoins!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */}
-
+                
                 {this.props.clickedCoins.map((f)=>{
                     return (
                         <div key={f} id={f}>
