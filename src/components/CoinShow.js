@@ -24,7 +24,6 @@ class CoinShow extends Component {
           coin: coin
         });
       });
-      console.log(this.props.coins)
     }
   }
 
