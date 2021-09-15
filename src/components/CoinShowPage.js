@@ -59,7 +59,7 @@ class CoinShowPage extends Component {
               </div>
             </div>
             <div className="column">
-              <BuySell />
+              <BuySell info={this.state.coin} />
             </div>
           </div>
         </div>
