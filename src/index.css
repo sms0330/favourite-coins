@@ -162,6 +162,60 @@
   color: rgb(56, 163, 250);
 }
 
-main {
-  margin-top: 3vh;
+input::placeholder {
+  color: black;
+  /* font-weight: bold; */
+}
+
+.trade {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.trade button {
+  background: white;
+  border: 1px solid orange;
+  color: orange;
+  padding: 10px;
+  width: 82px;
+  margin-top: 45px;
+  margin-bottom: 30px;
+}
+
+.trade button:focus {
+  background: orange;
+  color: white;
+}
+
+.receipt {
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 155.25%;
+  /* identical to box height, or 19px */
+
+  text-transform: capitalize;
+  color: #13a775;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.formButton {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.formButton button {
+  padding: 10px;
+  margin-top: 20px;
+  width: 180px;
+  border: 0;
+  background: orange;
+  color: white;
+  font-size: x-small;
+  height: 40px;
 }

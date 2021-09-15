@@ -5,80 +5,145 @@ import Spinner from './Spinner';
 class BuySell extends Component {
   constructor(props) {
     super(props);
-    this.state = {coins: [], info: null, currency: null};
-  }
-  
-    componentDidMount() {
-        Coin.index().then(coins => {
-        const filteredCoins = coins.filter(c => {
-            if (
-            c.id === 'bitcoin' ||
-            c.id === 'ethereum' ||
-            c.id === 'ripple' ||
-            c.id === 'bitcoin-cash' ||
-            c.id === 'litecoin'
-            ) {
-            return true;
-            }
-            return false;
-        });
-        this.setState({
-            coins: filteredCoins,
-        });
-        });
-    }
-
-    HandleChange = (e) => {
-        e.preventDefault()
-        
-        const chosen = e.target.value
-        this.setState({info: this.state.coins.filter((coi) => {
-            return coi.name === chosen
-        })});
-
-        this.setState({currency: chosen});
+    this.state = {
+      coins: [],
+      currency: null,
+      price: null,
+      amount: null,
+      buy: null,
+      sell: null,
+      receipt: null,
+      info: [],
     };
+  }
 
+  componentDidMount() {
+    Coin.index().then(coins => {
+      const filteredCoins = coins.filter(c => {
+        if (
+          c.id === 'bitcoin' ||
+          c.id === 'ethereum' ||
+          c.id === 'ripple' ||
+          c.id === 'bitcoin-cash' ||
+          c.id === 'litecoin'
+        ) {
+          return true;
+        }
+        return false;
+      });
+      this.setState({
+        coins: filteredCoins,
+      });
+    });
+  }
+  HandleChange = e => {
+    e.preventDefault();
+    const chosen = e.target.value;
+    this.setState({
+      info: this.state.coins.filter(coin => {
+        return coin.name === chosen;
+      }),
+    });
 
-    render() {
+    this.setState({ currency: chosen });
+  };
+
+  HandleAmount = e => {
+    e.preventDefault();
+    const chosen = e.target.value;
+    this.setState({ amount: chosen });
+  };
+
+  Buy = e => {
+    e.preventDefault();
+    this.setState({ buy: true });
+    this.setState({ sell: false });
+  };
+
+  Sell = e => {
+    e.preventDefault();
+    this.setState({ buy: false });
+    this.setState({ sell: true });
+  };
+
+  Submit = e => {
+    const { amount, price, buy, sell, coins, info } = this.state;
+    e.preventDefault();
+
+    if (buy === true && sell === false) {
+      let difference = 0;
+
+      difference = (info[0].current_price * amount) / price;
+      console.log(difference);
+      this.setState({receipt: `You have purchased ${amount} ${info[0].symbol.toUpperCase()} for ${difference} ${coins[1].symbol}`});
+    } else if (buy === false && sell === true) {
+      let difference = 0;
+
+      difference = (info[0].current_price * amount) / price;
+      this.setState({receipt: `You have sold ${amount} ${info[0].symbol.toUpperCase()} for ${difference} ${coins[1].symbol}`});
+    }
+  };
+
+  render() {
     if (!this.state.coins) {
       return <Spinner />;
     }
     return (
-        <form>
-            <div className="two column row">
-                <br/>
-                <button className="ui orange basic button">BUY</button>
-                <button className="ui orange basic button">SELL</button>
-                <div/><br/>
-                <div className="dropdown">
-                <select value={this.state.currency} onChange={this.HandleChange}>
-                    <option disabled selected>Select Trade Currency </option>
+      <form>
+        <div className="two column row">
+            <div className="trade">
+                <br />
+                <button className="button" onClick={this.Buy}>BUY</button>
+                <button className="button" onClick={this.Sell}>SELL</button>
+            </div>
+        <div />
+          <br />
+          <div className="dropdown currency">
+            <select
+              value={this.state.currency}
+              onChange={this.HandleChange}
+              className="ui fluid search dropdown"
+            >
+              <option disabled selected>
+                Select Trade Currency{' '}
+              </option>
+              {this.state.coins.map(coin => {
+                return (
+                  <option key={coin.name} value={coin.name}>
+                    {coin.name}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+          <br />
+          <div className="ui form">
+            <input type="number" min="0" placeholder="Amount" value={this.state.amount} onChange={this.HandleAmount} />
+            {/* <select className="ui fluid search dropdown" multiple="" value={this.state.amount} onChange={this.HandleAmount}>
+                    <option disabled selected> Amount </option>
                     {   
-                        this.state.coins.map((coin) => {
+                        this.state.numbers.map((number) => {
                         return (
-                                <option key={coin.name} 
-                                    value={coin.name}
+                                <option key={number} 
+                                    value={number}
                                     >
-                                    {coin.name}
+                                    {number}
                                 </option>
                         );
                     })
                     }
-                </select>
-                </div><br/>
-                <br/>
-                <div className="ui dropdown item">
-                Amount <i className="dropdown icon"></i>
-                <div className="menu">
-                    <i className="item">1</i>
-                    <i className="item">2</i>
-                    <i className="item">3</i>
-                </div>
-                </div><br/><br/>
-                <button className="ui orange button">SUBMIT</button>
-            </div>
-        </form>
+                </select> */}
+            <br />
+          </div>
+          <br />
+          <div className="formButton">
+            <button className="button" onClick={this.Submit}>
+                <h5>SUBMIT</h5>
+            </button>
+          </div>
+        </div>
+        <div className='receipt'>{this.state.receipt}</div>
+      </form>
     );
   }
 }
