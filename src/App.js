@@ -56,6 +56,7 @@ class App extends Component {
       <div className="App">
         <Router>
           <FavouritePage favourites={this.state.favourites} remove={this.remove.bind(this)}/>
+          <br/>
           <CoinIndexPage />
             <Switch>
               <Route
