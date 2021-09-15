@@ -59,7 +59,7 @@ class CoinShow extends Component {
               </div>
             </div>
             <div className="column">
-              <CoinTrade info={this.state.coin} />
+              <CoinTrade info={this.state.coin} coins={this.props.coins} />
             </div>
           </div>
         </div>

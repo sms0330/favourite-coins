@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { Coin } from '../requests';
 import Spinner from './Spinner';
 
 class CoinTrade extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      coins: [],
       target: null,
       targetPrice: null,
       targetAmount: null,
@@ -17,29 +15,9 @@ class CoinTrade extends Component {
     };
   }
 
-  componentDidMount() {
-    Coin.index().then(coins => {
-      const filteredCoins = coins.filter(c => {
-        if (
-          c.id === 'bitcoin' ||
-          c.id === 'ethereum' ||
-          c.id === 'ripple' ||
-          c.id === 'bitcoin-cash' ||
-          c.id === 'litecoin'
-        ) {
-          return true;
-        }
-        return false;
-      });
-      this.setState({
-        coins: filteredCoins,
-      });
-    });
-  }
-
   GetDropdownCoinPrice = e => {
     e.preventDefault();
-    const coin = this.state.coins.find(coin => coin.id === e.target.value);
+    const coin = this.props.coins.find(coin => coin.id === e.target.value);
     const price = coin.current_price;
     this.setState({ dropdownCoinPrice: price });
   };
@@ -53,7 +31,7 @@ class CoinTrade extends Component {
   Getprice(e) {
     e.preventDefault();
     const value = e.target.value;
-    const coin = this.state.coins.find(coin => {
+    const coin = this.props.coins.find(coin => {
       return coin.name === value;
     });
     const price = coin.current_price;
@@ -100,7 +78,7 @@ class CoinTrade extends Component {
   };
 
   render() {
-    if (!this.state.coins) {
+    if (!this.props.coins) {
       return <Spinner />;
     }
     return (
@@ -127,7 +105,7 @@ class CoinTrade extends Component {
               <option selected disabled>
                 Select Trade Currency{' '}
               </option>
-              {this.state.coins.map(coin => {
+              {this.props.coins.map(coin => {
                 if (coin.name !== this.props.info.name) {
                   return (
                     <option key={coin.name} value={coin.name}>

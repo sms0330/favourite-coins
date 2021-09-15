@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Coin } from '../requests';
 import Spinner from './Spinner';
 
 class CoinIndex extends Component {
@@ -10,28 +9,9 @@ class CoinIndex extends Component {
       coins: [],
     };
   }
-  componentDidMount() {
-    Coin.index().then(coins => {
-      const filteredCoins = coins.filter(c => {
-        if (
-          c.id === 'bitcoin' ||
-          c.id === 'ethereum' ||
-          c.id === 'ripple' ||
-          c.id === 'bitcoin-cash' ||
-          c.id === 'litecoin'
-        ) {
-          return true;
-        }
-        return false;
-      });
-      this.setState({
-        coins: filteredCoins,
-      });
-    });
-  }
 
   render() {
-    if (!this.state.coins) {
+    if (!this.props.coins) {
       return <Spinner />;
     }
     return (
@@ -49,7 +29,7 @@ class CoinIndex extends Component {
 
           {/*  */}
           <tbody>
-            {this.state.coins.map((coin, index) => (
+            {this.props.coins.map((coin, index) => (
               <tr key={index}>
                 <td data-label="NAME">
                   <Link to={`/coins/${coin.id}`}>{coin.name.toUpperCase()}</Link>
