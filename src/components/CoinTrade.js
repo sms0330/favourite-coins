@@ -63,14 +63,12 @@ class CoinTrade extends Component {
 
   Buy = e => {
     e.preventDefault();
-    this.setState({ buy: true });
-    this.setState({ sell: false });
+    this.setState({ buy: true, sell: false });
   };
 
   Sell = e => {
     e.preventDefault();
-    this.setState({ buy: false });
-    this.setState({ sell: true });
+    this.setState({ buy: false, sell: true });
   };
 
   Submit = e => {
