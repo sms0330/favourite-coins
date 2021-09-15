@@ -63,14 +63,12 @@ class CoinTrade extends Component {
 
   Buy = e => {
     e.preventDefault();
-    this.setState({ buy: true });
-    this.setState({ sell: false });
+    this.setState({ buy: true, sell: false });
   };
 
   Sell = e => {
     e.preventDefault();
-    this.setState({ buy: false });
-    this.setState({ sell: true });
+    this.setState({ buy: false, sell: true });
   };
 
   Submit = e => {
@@ -82,19 +80,23 @@ class CoinTrade extends Component {
     console.log('targetAmount is ' + targetAmount);
     const coinNumToRef = refPrice / (targetPrice * targetAmount);
     const coinNumToTarget = (targetPrice * targetAmount) / refPrice;
-    if (buy === true && sell === false){
+    if (buy === true && sell === false && targetAmount && targetPrice){
       this.setState({
         receipt: `You have parchased ${
           targetAmount
-        } ${target ? target.toUpperCase() : null} for ${coinNumToTarget} ${refSymbol.toUpperCase()}`,
+        } ${target ? target.toUpperCase() : null} for ${coinNumToTarget} ${refSymbol.toUpperCase()}`
       });
-    } else if (buy === false && sell === true){
+    } else if (buy === false && sell === true && targetAmount && targetPrice){
       this.setState({
         receipt: `You have sold ${
           targetAmount
-        } ${target ? target.toUpperCase() : null} for ${coinNumToRef} ${refSymbol.toUpperCase()}`,
+        } ${target ? target.toUpperCase() : null} for ${coinNumToRef} ${refSymbol.toUpperCase()}`
       });
-    } 
+    } else {
+      
+      this.setState({
+        receipt: `please check the form`
+    });}
   };
 
   render() {
@@ -106,10 +108,10 @@ class CoinTrade extends Component {
         <div className="two column row">
           <div className="trade">
             <br />
-            <button className="button" onClick={this.Buy}>
+            <button className="buttons" onClick={this.Buy}>
               BUY
             </button>
-            <button className="button" onClick={this.Sell}>
+            <button className="buttons" onClick={this.Sell}>
               SELL
             </button>
           </div>
@@ -151,7 +153,6 @@ class CoinTrade extends Component {
           <div className="formButton">
             <button
               className="button"
-              onChange={this.GetPrice}
               onClick={e => {
                 this.Submit(e);
               }}

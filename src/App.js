@@ -26,17 +26,13 @@ class App extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevState.favourites !== this.state.favourites) {
       localStorage.setItem('favourites', JSON.stringify(this.state.favourites))
-        // this.setState( )
-        console.log('changed')
+      console.log('Component changed')
     }
   }
 
   childCallback(e, value) {
-    // value passed from child
     if (!this.state.favourites.includes(value)) {
     e.preventDefault();
-    console.log(value);
-    console.log(this.state)
     this.setState({favourites: [...this.state.favourites, value]});
     }
   }
@@ -44,8 +40,6 @@ class App extends Component {
   remove(i) {
     this.state.favourites.splice(i,1);
     this.setState({favourites: [...this.state.favourites]})
-    console.log(this.state.favourites)
-
   }
 
   render() {
@@ -63,7 +57,6 @@ class App extends Component {
                 exact
                 path="/coins/:id"
                 render={(props) => <CoinShow {...props} passToParent={this.childCallback.bind(this)} />}
-
               />
             </Switch>
         </Router>
