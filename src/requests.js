@@ -9,8 +9,5 @@ export const Coin = {
   },
   show(id) {
     return fetch(`${BASE_URL}/coins/${id}`).then(res => res.json());
-  },
-  price(id) {
-    return fetch(`${BASE_URL}/simple/price?ids=${id}&vs_currencies=eth`).then(res => res.json());
   }
 };

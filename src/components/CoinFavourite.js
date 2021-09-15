@@ -7,7 +7,7 @@ import XRP from './assets/img/XRP.svg';
 import Spinner from './Spinner';
 
 const images = { 'BITCOIN': Bitcoin, 'BITCOIN CASH': BitcoinCash, 'ETHEREUM': Ethereum, 'XRP': XRP, 'LITECOIN': Litecoin }
-class FavouritePage extends Component {
+class CoinFavourite extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -79,4 +79,4 @@ class FavouritePage extends Component {
     }
 }
 
-export default FavouritePage;
+export default CoinFavourite;

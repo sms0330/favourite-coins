@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Coin } from '../requests';
-import BuySell from './BuySell';
+import CoinTrade from './CoinTrade';
 import Spinner from './Spinner';
 
-class CoinShowPage extends Component {
+class CoinShow extends Component {
   constructor(props) {
     super(props);
     this.state = { coin: null, showingCoin: null };
@@ -59,7 +59,7 @@ class CoinShowPage extends Component {
               </div>
             </div>
             <div className="column">
-              <BuySell info={this.state.coin} />
+              <CoinTrade info={this.state.coin} />
             </div>
           </div>
         </div>
@@ -68,4 +68,4 @@ class CoinShowPage extends Component {
   }
 }
 
-export default CoinShowPage;
+export default CoinShow;

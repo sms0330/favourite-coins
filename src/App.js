@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import CoinIndexPage from './components/CoinIndexPage';
-import FavouritePage from './components/FavouritePage';
+import CoinIndex from './components/CoinIndex';
+import CoinFavourite from './components/CoinFavourite';
 import Spinner from "./components/Spinner";
-import CoinShowPage from './components/CoinShowPage';
+import CoinShow from './components/CoinShow';
 
 const saveData = JSON.parse(localStorage.getItem("favourites"));
 class App extends Component {
@@ -55,14 +55,14 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
-          <FavouritePage favourites={this.state.favourites} remove={this.remove.bind(this)}/>
+          <CoinFavourite favourites={this.state.favourites} remove={this.remove.bind(this)}/>
           <br/>
-          <CoinIndexPage />
+          <CoinIndex />
             <Switch>
               <Route
                 exact
                 path="/coins/:id"
-                render={(props) => <CoinShowPage {...props} passToParent={this.childCallback.bind(this)} />}
+                render={(props) => <CoinShow {...props} passToParent={this.childCallback.bind(this)} />}
 
               />
             </Switch>

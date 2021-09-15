@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Coin } from '../requests';
 import Spinner from './Spinner';
 
-class CoinIndexPage extends Component {
+class CoinIndex extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -67,4 +67,4 @@ class CoinIndexPage extends Component {
   }
 }
 
-export default CoinIndexPage;
+export default CoinIndex;
