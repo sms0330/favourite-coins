@@ -75,7 +75,7 @@ class App extends Component {
               <Route
                 exact
                 path="/coins/:id"
-                render={(props) => <CoinShow {...props} passToParent={this.childCallback.bind(this)} />}
+                render={(props) => <CoinShow {...props} coins={this.state.coins} passToParent={this.childCallback.bind(this)} />}
               />
             </Switch>
         </Router>
