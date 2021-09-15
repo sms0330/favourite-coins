@@ -13,7 +13,7 @@ class BuySell extends Component {
       buy: null,
       sell: null,
       receipt: null,
-      info: [],
+      info: []
     };
   }
 
@@ -34,8 +34,17 @@ class BuySell extends Component {
       this.setState({
         coins: filteredCoins,
       });
+      console.log(this.props.info)
     });
   }
+
+  getDropDownMenu = (selectedCoin) => {
+      const nextCoinList = [...this.state.coins]
+      const index = nextCoinList.findIndex(coin => coin.id === selectedCoin.id)
+      nextCoinList.splice(index, 1)
+      return nextCoinList
+  }
+
   HandleChange = e => {
     e.preventDefault();
     const chosen = e.target.value;
@@ -67,20 +76,37 @@ class BuySell extends Component {
   };
 
   Submit = e => {
+    console.log(this.state.info)
     const { amount, price, buy, sell, coins, info } = this.state;
     e.preventDefault();
+
+    // const selectedCoin = {this.props.info.id};
+    // const dropDownSelected = {id: 'xrp', name: 'ripple', price: 1.60};
+
+    // const buyCoin = (selectedCoin, dropDownSelected, amount) => {
+    //     const numOfCoin = (dropDownSelected.price * amount) / selectedCoin.price
+    //     return `${amount}개의 ${dropDownSelected.name}을 ${numOfCoin}개의 ${selectedCoin.name}으로 구매했습니다.`
+    // }
+
+    // const SellCoin = (selectedCoin, dropDownSelected, amount) => {
+    //     const numOfCoin = (selectedCoin.price / dropDownSelected.price) * amount
+    //     return `${amount}개의 ${selectedCoin.name}을 ${numOfCoin}개의 ${dropDownSelected.name}에 판매했습니다.`
+    // }
+
+    // console.log(buyCoin(selectedCoin, dropDownSelected, amount));
+    // console.log(SellCoin(selectedCoin, dropDownSelected, amount));
 
     if (buy === true && sell === false) {
       let difference = 0;
 
-      difference = (info[0].current_price * amount) / price;
+      difference = (info[0].current_price * amount) / this.props.info.current_price;
       console.log(difference);
-      this.setState({receipt: `You have purchased ${amount} ${info[0].symbol.toUpperCase()} for ${difference} ${coins[1].symbol}`});
+      this.setState({receipt: `You have purchased ${amount} ${info[0].symbol.toUpperCase()} for ${difference} ${this.props.info.symbol}`});
     } else if (buy === false && sell === true) {
       let difference = 0;
 
-      difference = (info[0].current_price * amount) / price;
-      this.setState({receipt: `You have sold ${amount} ${info[0].symbol.toUpperCase()} for ${difference} ${coins[1].symbol}`});
+      difference = (this.props.info.current_price / info[0].current_price) * amount;
+      this.setState({receipt: `You have sold ${amount} ${info[0].symbol.toUpperCase()} for ${difference} ${this.props.info.symbol}`});
     }
   };
 
@@ -104,7 +130,7 @@ class BuySell extends Component {
               onChange={this.HandleChange}
               className="ui fluid search dropdown"
             >
-              <option disabled selected>
+              <option selected disabled>
                 Select Trade Currency{' '}
               </option>
               {this.state.coins.map(coin => {
