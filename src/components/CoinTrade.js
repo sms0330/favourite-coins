@@ -101,8 +101,9 @@ class CoinTrade extends Component {
                 this.Getprice(e);
               }}
               className="ui fluid search dropdown"
+              defaultValue='ImDefault'
             >
-              <option selected disabled>
+              <option value='ImDefault' disabled>
                 Select Trade Currency{' '}
               </option>
               {this.props.coins.map(coin => {
