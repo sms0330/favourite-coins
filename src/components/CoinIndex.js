@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Coin } from '../requests';
 import Spinner from './Spinner';
 
 class CoinIndex extends Component {
@@ -10,25 +9,6 @@ class CoinIndex extends Component {
       coins: [],
     };
   }
-  // componentDidMount() {
-  //   Coin.index().then(coins => {
-  //     const filteredCoins = coins.filter(c => {
-  //       if (
-  //         c.id === 'bitcoin' ||
-  //         c.id === 'ethereum' ||
-  //         c.id === 'ripple' ||
-  //         c.id === 'bitcoin-cash' ||
-  //         c.id === 'litecoin'
-  //       ) {
-  //         return true;
-  //       }
-  //       return false;
-  //     });
-  //     this.setState({
-  //       coins: filteredCoins,
-  //     });
-  //   });
-  // }
 
   render() {
     if (!this.props.coins) {
